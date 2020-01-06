@@ -2,7 +2,7 @@
  ******************************************************************
  *           C++ Mathematical Expression Toolkit Library          *
  *                                                                *
- * Author: Arash Partow (1999-2019)                               *
+ * Author: Arash Partow (1999-2020)                               *
  * URL: http://www.partow.net/programming/exprtk/index.html       *
  *                                                                *
  * Copyright notice:                                              *
@@ -3649,10 +3649,11 @@ namespace exprtk
             sequence_validator()
             : lexer::token_scanner(2)
             {
-               add_invalid(lexer::token::e_number ,lexer::token::e_number );
-               add_invalid(lexer::token::e_string ,lexer::token::e_string );
-               add_invalid(lexer::token::e_number ,lexer::token::e_string );
-               add_invalid(lexer::token::e_string ,lexer::token::e_number );
+               add_invalid(lexer::token::e_number, lexer::token::e_number);
+               add_invalid(lexer::token::e_string, lexer::token::e_string);
+               add_invalid(lexer::token::e_number, lexer::token::e_string);
+               add_invalid(lexer::token::e_string, lexer::token::e_number);
+
                add_invalid_set1(lexer::token::e_assign );
                add_invalid_set1(lexer::token::e_shr    );
                add_invalid_set1(lexer::token::e_shl    );
@@ -3726,21 +3727,21 @@ namespace exprtk
 
             void add_invalid_set1(lexer::token::token_type t)
             {
-               add_invalid(t,lexer::token::e_assign);
-               add_invalid(t,lexer::token::e_shr   );
-               add_invalid(t,lexer::token::e_shl   );
-               add_invalid(t,lexer::token::e_lte   );
-               add_invalid(t,lexer::token::e_ne    );
-               add_invalid(t,lexer::token::e_gte   );
-               add_invalid(t,lexer::token::e_lt    );
-               add_invalid(t,lexer::token::e_gt    );
-               add_invalid(t,lexer::token::e_eq    );
-               add_invalid(t,lexer::token::e_comma );
-               add_invalid(t,lexer::token::e_div   );
-               add_invalid(t,lexer::token::e_mul   );
-               add_invalid(t,lexer::token::e_mod   );
-               add_invalid(t,lexer::token::e_pow   );
-               add_invalid(t,lexer::token::e_colon );
+               add_invalid(t, lexer::token::e_assign);
+               add_invalid(t, lexer::token::e_shr   );
+               add_invalid(t, lexer::token::e_shl   );
+               add_invalid(t, lexer::token::e_lte   );
+               add_invalid(t, lexer::token::e_ne    );
+               add_invalid(t, lexer::token::e_gte   );
+               add_invalid(t, lexer::token::e_lt    );
+               add_invalid(t, lexer::token::e_gt    );
+               add_invalid(t, lexer::token::e_eq    );
+               add_invalid(t, lexer::token::e_comma );
+               add_invalid(t, lexer::token::e_div   );
+               add_invalid(t, lexer::token::e_mul   );
+               add_invalid(t, lexer::token::e_mod   );
+               add_invalid(t, lexer::token::e_pow   );
+               add_invalid(t, lexer::token::e_colon );
             }
 
             bool invalid_bracket_check(lexer::token::token_type base, lexer::token::token_type t)
@@ -3750,7 +3751,7 @@ namespace exprtk
                   switch (t)
                   {
                      case lexer::token::e_assign : return (']' != base);
-                     case lexer::token::e_string : return true;
+                     case lexer::token::e_string : return (')' != base);
                      default                     : return false;
                   }
                }
@@ -3821,23 +3822,23 @@ namespace exprtk
             sequence_validator_3tokens()
             : lexer::token_scanner(3)
             {
-               add_invalid(lexer::token::e_number , lexer::token::e_number , lexer::token::e_number);
-               add_invalid(lexer::token::e_string , lexer::token::e_string , lexer::token::e_string);
-               add_invalid(lexer::token::e_comma  , lexer::token::e_comma  , lexer::token::e_comma );
+               add_invalid(lexer::token::e_number, lexer::token::e_number, lexer::token::e_number);
+               add_invalid(lexer::token::e_string, lexer::token::e_string, lexer::token::e_string);
+               add_invalid(lexer::token::e_comma , lexer::token::e_comma , lexer::token::e_comma );
 
-               add_invalid(lexer::token::e_add ,lexer::token::e_add , lexer::token::e_add);
-               add_invalid(lexer::token::e_sub ,lexer::token::e_sub , lexer::token::e_sub);
-               add_invalid(lexer::token::e_div ,lexer::token::e_div , lexer::token::e_div);
-               add_invalid(lexer::token::e_mul ,lexer::token::e_mul , lexer::token::e_mul);
-               add_invalid(lexer::token::e_mod ,lexer::token::e_mod , lexer::token::e_mod);
-               add_invalid(lexer::token::e_pow ,lexer::token::e_pow , lexer::token::e_pow);
+               add_invalid(lexer::token::e_add   , lexer::token::e_add   , lexer::token::e_add   );
+               add_invalid(lexer::token::e_sub   , lexer::token::e_sub   , lexer::token::e_sub   );
+               add_invalid(lexer::token::e_div   , lexer::token::e_div   , lexer::token::e_div   );
+               add_invalid(lexer::token::e_mul   , lexer::token::e_mul   , lexer::token::e_mul   );
+               add_invalid(lexer::token::e_mod   , lexer::token::e_mod   , lexer::token::e_mod   );
+               add_invalid(lexer::token::e_pow   , lexer::token::e_pow   , lexer::token::e_pow   );
 
-               add_invalid(lexer::token::e_add ,lexer::token::e_sub , lexer::token::e_add);
-               add_invalid(lexer::token::e_sub ,lexer::token::e_add , lexer::token::e_sub);
-               add_invalid(lexer::token::e_div ,lexer::token::e_mul , lexer::token::e_div);
-               add_invalid(lexer::token::e_mul ,lexer::token::e_div , lexer::token::e_mul);
-               add_invalid(lexer::token::e_mod ,lexer::token::e_pow , lexer::token::e_mod);
-               add_invalid(lexer::token::e_pow ,lexer::token::e_mod , lexer::token::e_pow);
+               add_invalid(lexer::token::e_add   , lexer::token::e_sub   , lexer::token::e_add   );
+               add_invalid(lexer::token::e_sub   , lexer::token::e_add   , lexer::token::e_sub   );
+               add_invalid(lexer::token::e_div   , lexer::token::e_mul   , lexer::token::e_div   );
+               add_invalid(lexer::token::e_mul   , lexer::token::e_div   , lexer::token::e_mul   );
+               add_invalid(lexer::token::e_mod   , lexer::token::e_pow   , lexer::token::e_mod   );
+               add_invalid(lexer::token::e_pow   , lexer::token::e_mod   , lexer::token::e_pow   );
             }
 
             bool result()
@@ -6999,7 +7000,7 @@ namespace exprtk
                r0 = n0_c.second;
             else if (n0_e.first)
             {
-               T r0_value = n0_e.second->value();
+               const T r0_value = n0_e.second->value();
 
                if (r0_value < 0)
                   return false;
@@ -7013,7 +7014,7 @@ namespace exprtk
                r1 = n1_c.second;
             else if (n1_e.first)
             {
-               T r1_value = n1_e.second->value();
+               const T r1_value = n1_e.second->value();
 
                if (r1_value < 0)
                   return false;
@@ -9471,10 +9472,7 @@ namespace exprtk
 
          inline T value() const
          {
-            if (!arg_list_.empty())
-               return VarArgFunction::process(arg_list_);
-            else
-               return std::numeric_limits<T>::quiet_NaN();
+            return VarArgFunction::process(arg_list_);
          }
 
          inline typename expression_node<T>::node_type type() const
@@ -9773,8 +9771,8 @@ namespace exprtk
 
                while (vec < upper_bound)
                {
-                 #define exprtk_loop(N) \
-                  vec[N] = v;           \
+                  #define exprtk_loop(N) \
+                  vec[N] = v;            \
 
                   exprtk_loop( 0) exprtk_loop( 1)
                   exprtk_loop( 2) exprtk_loop( 3)
@@ -14392,7 +14390,7 @@ namespace exprtk
 
          inline T3 t3() const
          {
-            return t2_;
+            return t3_;
          }
 
          std::string type_id() const
@@ -20191,7 +20189,7 @@ namespace exprtk
                dec_.return_present_ = true;
 
                e = expression_generator_
-                     .return_envelope(e,results_context_,retinvk_ptr);
+                     .return_envelope(e, results_context_, retinvk_ptr);
             }
 
             expr.set_expression(e);
@@ -20661,25 +20659,25 @@ namespace exprtk
 
             switch (current_token().type)
             {
-               case token_t::e_assign : current_state.set(e_level00,e_level00,details::e_assign); break;
-               case token_t::e_addass : current_state.set(e_level00,e_level00,details::e_addass); break;
-               case token_t::e_subass : current_state.set(e_level00,e_level00,details::e_subass); break;
-               case token_t::e_mulass : current_state.set(e_level00,e_level00,details::e_mulass); break;
-               case token_t::e_divass : current_state.set(e_level00,e_level00,details::e_divass); break;
-               case token_t::e_modass : current_state.set(e_level00,e_level00,details::e_modass); break;
-               case token_t::e_swap   : current_state.set(e_level00,e_level00,details::e_swap  ); break;
-               case token_t::e_lt     : current_state.set(e_level05,e_level06,details::    e_lt); break;
-               case token_t::e_lte    : current_state.set(e_level05,e_level06,details::   e_lte); break;
-               case token_t::e_eq     : current_state.set(e_level05,e_level06,details::    e_eq); break;
-               case token_t::e_ne     : current_state.set(e_level05,e_level06,details::    e_ne); break;
-               case token_t::e_gte    : current_state.set(e_level05,e_level06,details::   e_gte); break;
-               case token_t::e_gt     : current_state.set(e_level05,e_level06,details::    e_gt); break;
-               case token_t::e_add    : current_state.set(e_level07,e_level08,details::   e_add); break;
-               case token_t::e_sub    : current_state.set(e_level07,e_level08,details::   e_sub); break;
-               case token_t::e_div    : current_state.set(e_level10,e_level11,details::   e_div); break;
-               case token_t::e_mul    : current_state.set(e_level10,e_level11,details::   e_mul); break;
-               case token_t::e_mod    : current_state.set(e_level10,e_level11,details::   e_mod); break;
-               case token_t::e_pow    : current_state.set(e_level12,e_level12,details::   e_pow); break;
+               case token_t::e_assign : current_state.set(e_level00,e_level00, details::e_assign); break;
+               case token_t::e_addass : current_state.set(e_level00,e_level00, details::e_addass); break;
+               case token_t::e_subass : current_state.set(e_level00,e_level00, details::e_subass); break;
+               case token_t::e_mulass : current_state.set(e_level00,e_level00, details::e_mulass); break;
+               case token_t::e_divass : current_state.set(e_level00,e_level00, details::e_divass); break;
+               case token_t::e_modass : current_state.set(e_level00,e_level00, details::e_modass); break;
+               case token_t::e_swap   : current_state.set(e_level00,e_level00, details::e_swap  ); break;
+               case token_t::e_lt     : current_state.set(e_level05,e_level06, details::    e_lt); break;
+               case token_t::e_lte    : current_state.set(e_level05,e_level06, details::   e_lte); break;
+               case token_t::e_eq     : current_state.set(e_level05,e_level06, details::    e_eq); break;
+               case token_t::e_ne     : current_state.set(e_level05,e_level06, details::    e_ne); break;
+               case token_t::e_gte    : current_state.set(e_level05,e_level06, details::   e_gte); break;
+               case token_t::e_gt     : current_state.set(e_level05,e_level06, details::    e_gt); break;
+               case token_t::e_add    : current_state.set(e_level07,e_level08, details::   e_add); break;
+               case token_t::e_sub    : current_state.set(e_level07,e_level08, details::   e_sub); break;
+               case token_t::e_div    : current_state.set(e_level10,e_level11, details::   e_div); break;
+               case token_t::e_mul    : current_state.set(e_level10,e_level11, details::   e_mul); break;
+               case token_t::e_mod    : current_state.set(e_level10,e_level11, details::   e_mod); break;
+               case token_t::e_pow    : current_state.set(e_level12,e_level12, details::   e_pow); break;
                default                : if (token_t::e_symbol == current_token().type)
                                         {
                                            static const std::string s_and   =   "and";
@@ -23504,8 +23502,7 @@ namespace exprtk
                  if (*iter == delimiter)
                  {
                      result.push_back(std::string(current_begin, iter));
-                     ++iter;
-                     current_begin = iter;
+                     current_begin = ++iter;
                  }
                  else
                      ++iter;
@@ -35328,36 +35325,110 @@ namespace exprtk
       friend void details::disable_type_checking(ParserType& p);
    };
 
+   namespace details
+   {
+      template <typename T>
+      struct collector_helper
+      {
+         typedef exprtk::symbol_table<T> symbol_table_t;
+         typedef exprtk::expression<T>     expression_t;
+         typedef exprtk::parser<T>             parser_t;
+         typedef typename parser_t::dependent_entity_collector::symbol_t symbol_t;
+         typedef typename parser_t::unknown_symbol_resolver usr_t;
+
+         struct resolve_as_vector : public parser_t::unknown_symbol_resolver
+         {
+            typedef exprtk::parser<T> parser_t;
+
+            resolve_as_vector()
+            : usr_t(usr_t::e_usrmode_extended)
+            {}
+
+            virtual bool process(const std::string& unknown_symbol,
+                                 symbol_table_t& symbol_table,
+                                 std::string&)
+            {
+               static T v[1];
+               symbol_table.add_vector(unknown_symbol,v);
+               return true;
+            }
+         };
+
+         static inline bool collection_pass(const std::string& expression_string,
+                                            std::set<std::string>& symbol_set,
+                                            const bool collect_variables,
+                                            const bool collect_functions,
+                                            const bool vector_pass,
+                                            symbol_table_t& ext_symbol_table)
+         {
+            symbol_table_t symbol_table;
+            expression_t   expression;
+            parser_t       parser;
+
+            resolve_as_vector vect_resolver;
+
+            expression.register_symbol_table(symbol_table    );
+            expression.register_symbol_table(ext_symbol_table);
+
+            if (vector_pass)
+               parser.enable_unknown_symbol_resolver(&vect_resolver);
+            else
+               parser.enable_unknown_symbol_resolver();
+
+            if (collect_variables)
+               parser.dec().collect_variables() = true;
+
+            if (collect_functions)
+               parser.dec().collect_functions() = true;
+
+            bool pass_result = false;
+
+            details::disable_type_checking(parser);
+
+            if (parser.compile(expression_string, expression))
+            {
+               pass_result = true;
+
+               std::deque<symbol_t> symb_list;
+               parser.dec().symbols(symb_list);
+
+               for (std::size_t i = 0; i < symb_list.size(); ++i)
+               {
+                  symbol_set.insert(symb_list[i].first);
+               }
+            }
+
+            return pass_result;
+         }
+      };
+   }
+
    template <typename Allocator,
              template <typename, typename> class Sequence>
-   inline bool collect_variables(const std::string& expr_str,
+   inline bool collect_variables(const std::string& expression,
                                  Sequence<std::string, Allocator>& symbol_list)
    {
       typedef double T;
-      typedef exprtk::symbol_table<T> symbol_table_t;
-      typedef exprtk::expression<T>     expression_t;
-      typedef exprtk::parser<T>             parser_t;
-      typedef parser_t::dependent_entity_collector::symbol_t symbol_t;
+      typedef details::collector_helper<T> collect_t;
 
-      symbol_table_t symbol_table;
-      expression_t   expression;
-      parser_t       parser;
+      collect_t::symbol_table_t null_symbol_table;
 
-      expression.register_symbol_table(symbol_table);
+      std::set<std::string> symbol_set;
 
-      parser.enable_unknown_symbol_resolver();
-      parser.dec().collect_variables() = true;
+      const bool variable_pass = collect_t::collection_pass
+                                    (expression, symbol_set, true, false, false, null_symbol_table);
+      const bool vector_pass   = collect_t::collection_pass
+                                    (expression, symbol_set, true, false,  true, null_symbol_table);
 
-      if (!parser.compile(expr_str, expression))
+      if (!variable_pass && !vector_pass)
          return false;
 
-      std::deque<symbol_t> symb_list;
+      std::set<std::string>::iterator itr = symbol_set.begin();
 
-      parser.dec().symbols(symb_list);
-
-      for (std::size_t i = 0; i < symb_list.size(); ++i)
+      while (symbol_set.end() != itr)
       {
-         symbol_list.push_back(symb_list[i].first);
+         symbol_list.push_back(*itr);
+         ++itr;
       }
 
       return true;
@@ -35366,37 +35437,28 @@ namespace exprtk
    template <typename T,
              typename Allocator,
              template <typename, typename> class Sequence>
-   inline bool collect_variables(const std::string& expr_str,
+   inline bool collect_variables(const std::string& expression,
                                  exprtk::symbol_table<T>& extrnl_symbol_table,
                                  Sequence<std::string, Allocator>& symbol_list)
    {
-      typedef exprtk::symbol_table<T> symbol_table_t;
-      typedef exprtk::expression<T>     expression_t;
-      typedef exprtk::parser<T>             parser_t;
-      typedef typename parser_t::dependent_entity_collector::symbol_t symbol_t;
+      typedef details::collector_helper<T> collect_t;
 
-      symbol_table_t symbol_table;
-      expression_t   expression;
-      parser_t       parser;
+      std::set<std::string> symbol_set;
 
-      expression.register_symbol_table(symbol_table);
-      expression.register_symbol_table(extrnl_symbol_table);
+      const bool variable_pass = collect_t::collection_pass
+                                    (expression, symbol_set, true, false, false, extrnl_symbol_table);
+      const bool vector_pass   = collect_t::collection_pass
+                                    (expression, symbol_set, true, false,  true, extrnl_symbol_table);
 
-      parser.enable_unknown_symbol_resolver();
-      parser.dec().collect_variables() = true;
-
-      details::disable_type_checking(parser);
-
-      if (!parser.compile(expr_str, expression))
+      if (!variable_pass && !vector_pass)
          return false;
 
-      std::deque<symbol_t> symb_list;
+      std::set<std::string>::iterator itr = symbol_set.begin();
 
-      parser.dec().symbols(symb_list);
-
-      for (std::size_t i = 0; i < symb_list.size(); ++i)
+      while (symbol_set.end() != itr)
       {
-         symbol_list.push_back(symb_list[i].first);
+         symbol_list.push_back(*itr);
+         ++itr;
       }
 
       return true;
@@ -35404,34 +35466,30 @@ namespace exprtk
 
    template <typename Allocator,
              template <typename, typename> class Sequence>
-   inline bool collect_functions(const std::string& expr_str,
+   inline bool collect_functions(const std::string& expression,
                                  Sequence<std::string, Allocator>& symbol_list)
    {
       typedef double T;
-      typedef exprtk::symbol_table<T> symbol_table_t;
-      typedef exprtk::expression<T>     expression_t;
-      typedef exprtk::parser<T>             parser_t;
-      typedef parser_t::dependent_entity_collector::symbol_t symbol_t;
+      typedef details::collector_helper<T> collect_t;
 
-      symbol_table_t symbol_table;
-      expression_t   expression;
-      parser_t       parser;
+      collect_t::symbol_table_t null_symbol_table;
 
-      expression.register_symbol_table(symbol_table);
+      std::set<std::string> symbol_set;
 
-      parser.enable_unknown_symbol_resolver();
-      parser.dec().collect_functions() = true;
+      const bool variable_pass = collect_t::collection_pass
+                                    (expression, symbol_set, false, true, false, null_symbol_table);
+      const bool vector_pass   = collect_t::collection_pass
+                                    (expression, symbol_set, false, true,  true, null_symbol_table);
 
-      if (!parser.compile(expr_str, expression))
+      if (!variable_pass && !vector_pass)
          return false;
 
-      std::deque<symbol_t> symb_list;
+      std::set<std::string>::iterator itr = symbol_set.begin();
 
-      parser.dec().symbols(symb_list);
-
-      for (std::size_t i = 0; i < symb_list.size(); ++i)
+      while (symbol_set.end() != itr)
       {
-         symbol_list.push_back(symb_list[i].first);
+         symbol_list.push_back(*itr);
+         ++itr;
       }
 
       return true;
@@ -35440,37 +35498,28 @@ namespace exprtk
    template <typename T,
              typename Allocator,
              template <typename, typename> class Sequence>
-   inline bool collect_functions(const std::string& expr_str,
+   inline bool collect_functions(const std::string& expression,
                                  exprtk::symbol_table<T>& extrnl_symbol_table,
                                  Sequence<std::string, Allocator>& symbol_list)
    {
-      typedef exprtk::symbol_table<T> symbol_table_t;
-      typedef exprtk::expression<T>     expression_t;
-      typedef exprtk::parser<T>             parser_t;
-      typedef typename parser_t::dependent_entity_collector::symbol_t symbol_t;
+      typedef details::collector_helper<T> collect_t;
 
-      symbol_table_t symbol_table;
-      expression_t   expression;
-      parser_t       parser;
+      std::set<std::string> symbol_set;
 
-      expression.register_symbol_table(symbol_table);
-      expression.register_symbol_table(extrnl_symbol_table);
+      const bool variable_pass = collect_t::collection_pass
+                                    (expression, symbol_set, false, true, false, extrnl_symbol_table);
+      const bool vector_pass   = collect_t::collection_pass
+                                    (expression, symbol_set, false, true,  true, extrnl_symbol_table);
 
-      parser.enable_unknown_symbol_resolver();
-      parser.dec().collect_functions() = true;
-
-      details::disable_type_checking(parser);
-
-      if (!parser.compile(expr_str, expression))
+      if (!variable_pass && !vector_pass)
          return false;
 
-      std::deque<symbol_t> symb_list;
+      std::set<std::string>::iterator itr = symbol_set.begin();
 
-      parser.dec().symbols(symb_list);
-
-      for (std::size_t i = 0; i < symb_list.size(); ++i)
+      while (symbol_set.end() != itr)
       {
-         symbol_list.push_back(symb_list[i].first);
+         symbol_list.push_back(*itr);
+         ++itr;
       }
 
       return true;
@@ -38878,9 +38927,9 @@ namespace exprtk
    namespace information
    {
       static const char* library = "Mathematical Expression Toolkit";
-      static const char* version = "2.71828182845904523536028747135266249775724709369995957"
-                                   "4966967627724076630353547594571382178525166427427466391";
-      static const char* date    = "20190818";
+      static const char* version = "2.7182818284590452353602874713526624977572470936999595749"
+                                   "669676277240766303535475945713821785251664274274663919320";
+      static const char* date    = "20200101";
 
       static inline std::string data()
       {
